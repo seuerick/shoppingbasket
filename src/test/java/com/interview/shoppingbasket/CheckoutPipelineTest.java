@@ -35,5 +35,4 @@ public class CheckoutPipelineTest {
     void executeAllPassedCheckoutSteps() {
         // Exercise - implement testing passing through all checkout steps
     }
-
 }

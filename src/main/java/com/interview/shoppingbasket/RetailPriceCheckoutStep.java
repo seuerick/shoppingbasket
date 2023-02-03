@@ -1,7 +1,9 @@
 package com.interview.shoppingbasket;
 
 public class RetailPriceCheckoutStep implements CheckoutStep {
+	
     private PricingService pricingService;
+    
     private double retailTotal;
 
     public RetailPriceCheckoutStep(PricingService pricingService) {

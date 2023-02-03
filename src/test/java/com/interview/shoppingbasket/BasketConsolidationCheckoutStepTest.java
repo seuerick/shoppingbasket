@@ -22,5 +22,4 @@ public class BasketConsolidationCheckoutStepTest {
 
         Mockito.verify(basket).consolidateItems();
     }
-
 }
