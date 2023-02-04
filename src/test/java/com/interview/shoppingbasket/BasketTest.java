@@ -55,6 +55,8 @@ public class BasketTest {
         basket.add("productCode", "myProduct", 10);
         basket.add("productCode", "myProduct", 10);
         basket.add("productCode2", "myProduct2", 10);
+        basket.add("productCode2", "myProduct2", 10);
+        basket.add("productCode3", "myProduct3", 10);
         basket.add("productCode3", "myProduct3", 10);
         
         basket.consolidateItems();

@@ -4,6 +4,7 @@ import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 
 public class RetailPriceCheckoutStepTest {
@@ -11,11 +12,13 @@ public class RetailPriceCheckoutStepTest {
     PricingService pricingService;
     CheckoutContext checkoutContext;
     Basket basket;
+    PromotionsService promotionsService;
 
     @BeforeEach
     void setup() {
         pricingService = Mockito.mock(PricingService.class);
         checkoutContext = Mockito.mock(CheckoutContext.class);
+        promotionsService = Mockito.mock(PromotionsService.class);
         basket = new Basket();
 
         when(checkoutContext.getBasket()).thenReturn(basket);
@@ -39,7 +42,9 @@ public class RetailPriceCheckoutStepTest {
 
         when(pricingService.getPrice("product1")).thenReturn(3.99);
         when(pricingService.getPrice("product2")).thenReturn(2.0);
-        RetailPriceCheckoutStep retailPriceCheckoutStep = new RetailPriceCheckoutStep(pricingService);
+        RetailPriceCheckoutStep retailPriceCheckoutStep = new RetailPriceCheckoutStep(pricingService, promotionsService);
+        
+        when(promotionsService.getPromotion(ArgumentMatchers.anyString())).thenReturn(basket.getPromotion("product1"));
 
         retailPriceCheckoutStep.execute(checkoutContext);
         Mockito.verify(checkoutContext).setRetailPriceTotal(3.99*10+2*10);

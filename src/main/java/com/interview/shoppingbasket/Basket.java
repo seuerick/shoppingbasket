@@ -7,6 +7,14 @@ import java.util.stream.Collectors;
 public class Basket {
 	
     private List<BasketItem> items = new ArrayList<>();
+    
+    private List<Promotion> promotions = new ArrayList<Promotion>();
+    
+    public Basket() {
+    	promotions.add(new Promotion("product1", "2 items for the price of 1", 0.5));
+    	promotions.add(new Promotion("product2", "50% off retail price", 0.5));
+    	promotions.add(new Promotion("product3", "10% off retail price", 0.1));
+	}
 
     public void add(String productCode, String productName, int quantity) {
         BasketItem basketItem = new BasketItem();
@@ -26,4 +34,16 @@ public class Basket {
     		     .distinct()
     		     .collect(Collectors.toList());
     }
+
+	public List<Promotion> getPromotions() {
+		return promotions;
+	}
+
+	public void setPromotions(List<Promotion> promotions) {
+		this.promotions = promotions;
+	}
+
+	public Promotion getPromotion(String productCode) {
+		return promotions.stream().filter(promotion -> promotion.getProductCode().equals(productCode)).findAny().orElseThrow();
+	}
 }
